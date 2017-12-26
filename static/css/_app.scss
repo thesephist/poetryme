@@ -8,6 +8,13 @@ main {
 
 main {
     margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 50px); // 50px is the vertical top margin
+}
+
+.mainArea {
+    margin-bottom: 32px;
 }
 
 h1,
@@ -26,10 +33,57 @@ h1 {
     box-shadow: 0 2px 5px rgba(#000, 0.3);
     margin-bottom: 24px;
     background: #fff;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 38px;
 
     p:first-child {
         font-weight: bold;
         font-size: 1.2em;
+    }
+
+    .showButton {
+        color: $pm-purple;
+        font-weight: bold;
+        position: absolute;
+        bottom: 20px;
+        left: 12px;
+        background: transparent;
+        font-size: 18px;
+        z-index: 5;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .7;
+        }
+
+        &::after {
+            content: ' less';
+        }
+    }
+
+    &.less {
+        max-height: 500px;
+
+        &::after {
+            content: '';
+            background: linear-gradient(
+                to top,
+                #fff,
+                #fff 20%,
+                transparent
+            );
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 220px;
+        }
+
+        .showButton::after {
+            content: ' more';
+        }
     }
 }
 
@@ -121,6 +175,7 @@ footer {
     color: $pm-purple;
     position: relative;
     padding: 18px 0;
+    flex-grow: 1; // to fill the bottom of a short page
 
     &::after {
         content: '';
@@ -138,7 +193,7 @@ footer {
 
 @media (min-width: 700px) {
     main {
-        max-width: 660px;
+        max-width: 670px;
         margin: 50px auto 0 auto;
     }
 
@@ -147,14 +202,14 @@ footer {
     }
 
     .subscriptionWrapper {
-        max-width: calc(100% - 480px);
+        max-width: calc(100% - 430px);
         width: 55%;
         float: left;
         margin-top: 60px;
     }
 
     .letter {
-        min-width: 450px;
+        min-width: 400px;
         width: 40%;
         float: right;
     }

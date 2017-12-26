@@ -3,7 +3,8 @@ window.PoetryMe = {
     // events
     ev: {
 		'click #subscription__submit': 'signup',
-		'keydown input': 'onKeydown',
+        'keydown input': 'onKeydown',
+        'click .showButton': 'toggleLetter',
 	},
 
 	// functions
@@ -38,6 +39,11 @@ window.PoetryMe = {
                 PoetryMe.f.signup()
             }
         },
+
+        toggleLetter() {
+            $('.letter').classList.toggle('less');
+        },
+
     },
 
 }
@@ -52,6 +58,8 @@ PoetryMe.init = function() {
 
         PoetryMeUtils.eventAdder(selector, eventName, fn)
     })
+
+    $('.letter').classList.add('less');
 
     // serviceWorker check
     // if ('serviceWorker' in navigator) {
