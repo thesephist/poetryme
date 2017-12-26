@@ -1,5 +1,5 @@
 #!/bin/sh
 
-surge --domain poetryme.surge.sh \
+surge --domain poetryme.com \
     -p ./static/
 
