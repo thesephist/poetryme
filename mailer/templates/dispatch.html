@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PoetryMe Dispatch</title>
+</head>
+
+<body style="margin:0">
+
+  <div class="content" style="
+font-family: sans-serif;
+margin: 0 auto 20px auto;
+max-width: 700px;
+border-top: 6px solid #67445C;
+">
+
+    <div class="logo">
+      <img src="data:image/png;base64,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"
+        alt="poetryme" style="
+    height: 60px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+    ">
+    </div>
+
+    <div class="sponsoredContent" style="
+    background: #eee;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 12px;
+    ">
+      A 250-character message from this week's sponsor.
+    </div>
+
+    <p>Hey there!</p>
+
+    <p>Here are some poems we picked out just for you! Hope you like them :)</p>
+
+    <div class="poem" style="
+  background: #eee;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  ">
+      <a style="color:#67445C" href="https://www.poets.org/">
+        <b>Poem 1 Title</b>, by Poet
+      </a>
+      <pre style="
+      font-family: sans-serif;
+      line-height: 1.4em;
+      color: #555;
+    ">
+    body text,
+    more body text</pre>
+    </div>
+    <div class="poem" style="
+  background: #eee;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  ">
+      <a style="color:#67445C" href="https://www.poets.org/">
+        <b>Poem 2 Title</b>, by Poet
+      </a>
+      <pre style="
+      font-family: sans-serif;
+      line-height: 1.4em;
+      color: #555;
+    ">
+    body text,
+    more body text</pre>
+    </div>
+    <div class="poem" style="
+  background: #eee;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  ">
+      <a style="color:#67445C" href="https://www.poets.org/">
+        <b>Poem 3 Title</b>, by Poet
+      </a>
+      <pre style="
+      font-family: sans-serif;
+      line-height: 1.4em;
+      color: #555;
+    ">
+    body text,
+    more body text</pre>
+    </div>
+
+    <p>Did you like this dispatch? Let us know, and we'll try to improve next week:</p>
+
+    <div class="buttonGroup" style="
+  overflow: hidden;
+  margin-bottom: 12px;
+  ">
+      <a href="mailto:hi@poetryme.com?subject=Good%20recommendations" style="
+  text-decoration: none;
+  font-size: 30px;
+  background: #eee;
+  display: block;
+  border-radius: 4px;
+  height: 40px;
+  float: left;
+  line-height: 40px;
+  text-align: center;
+  margin-right: 8px;
+  width: 40px;">👍</a>
+      <a href="mailto:hi@poetryme.com?subject=Bad%20recommendations" style="
+  text-decoration: none;
+  font-size: 30px;
+  background: #eee;
+  display: block;
+  border-radius: 4px;
+  height: 40px;
+  float: left;
+  line-height: 40px;
+  text-align: center;
+  width: 40px;">👎</a>
+    </div>
+
+    <p>Best,</p>
+    <p>Team PoetryMe</p>
+
+    <hr>
+
+    <p>Want more poems?
+      <a href="http://poetryme.com">Click here</a>.</p>
+
+    <div class="subMgmt" style="
+  background: #eee;
+  color: #777;
+  border-radius: 4px;
+  padding: 8px;
+  ">
+      <p>PoetryMe. [Address]</p>
+      <p>
+        <a href="mailto:hi@poetryme.com?subject=Unsubscribe%20from%20PoetryMe%20Dispatches" style="color:#67445C;opacity:.7">Unsubscribe</a>
+      </p>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
