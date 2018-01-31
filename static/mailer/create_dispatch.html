@@ -1,88 +1,91 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>PoetryMe Link Generator</title>
-    </head>
-    <body>
 
-        <div class="form">
-            <div class="item">
-                <label for="form__user">User name</label>
-                <input type="text" id="form__user" placeholder="Jane Doe" value="test">
-            </div>
-            <div class="item">
-                <label for="form__title">Poem Title</label>
-                <input type="text" id="form__title" placeholder="Red Wheelbarrow" value="test">
-            </div>
-            <div class="item">
-                <label for="form__author">Author</label>
-                <input type="text" id="form__author" placeholder="T. S. Eliot" value="test">
-            </div>
+<head>
+    <title>PoetryMe Link Generator</title>
+</head>
 
-            <button class="renderButton">Get links!</button>
+<body>
+
+    <div class="form">
+        <div class="item">
+            <label for="form__user">User name</label>
+            <input type="text" id="form__user" placeholder="Jane Doe" value="test">
+        </div>
+        <div class="item">
+            <label for="form__title">Poem Title</label>
+            <input type="text" id="form__title" placeholder="Red Wheelbarrow" value="test">
+        </div>
+        <div class="item">
+            <label for="form__author">Author</label>
+            <input type="text" id="form__author" placeholder="T. S. Eliot" value="test">
         </div>
 
-        Copy from right after here...
-        <div class="linkToCopy">
-        </div>
-        ... to right before here
+        <button class="renderButton">Get links!</button>
+    </div>
 
-        <div class="toastbox">
-        </div>
+    Copy from right after here...
+    <div class="linkToCopy">
+    </div>
+    ... to right before here
 
-        <script>
-function getValueFor(slug) {
-    return document.querySelector(`#form__${slug}`).value;
-}
+    <div class="toastbox">
+    </div>
 
-function getLinkWith(user, title, author, response) {
-    return `https://poetryme.com/response?title=${title}&user=${user}&author=${author}&response=${response}`;
-}
+    <script>
+        function getValueFor(slug) {
+            return document.querySelector(`#form__${slug}`).value;
+        }
 
-function update() {
-    const user = getValueFor('user');
-    const title = getValueFor('title');
-    const author = getValueFor('author');
+        function getLinkWith(user, title, author, response) {
+            return `https://poetryme.com/response?title=${title}&user=${user}&author=${author}&response=${response}`;
+        }
 
-    if (user && title && author) {
-        // Update the buttons
-        document.querySelector('.linkToCopy').innerHTML = `
-            <style>
-            .linkToCopy {
-                overflow: hidden;
-                margin: 8px;
+        function update() {
+            const user = getValueFor('user');
+            const title = getValueFor('title');
+            const author = getValueFor('author');
+
+            if (user && title && author) {
+                // Update the buttons
+                document.querySelector('.linkToCopy').innerHTML = `
+                    <style>
+                    .linkToCopy {
+                        overflow: hidden;
+                        margin: 8px;
+                    }
+                    a {
+                        display: block;
+                        background: #aaa;
+                        color: #fff;
+                        font-family: sans-serif;
+                        float: left;
+                        margin: 6px;
+                        padding: 4px 6px;
+                        border-radius: 3px;
+                        font-family: sans-serif;
+                        text-decoration: none;
+                    }
+                    </style>
+
+                    <a href="${getLinkWith(user, title, author, 'up')}">Thumbs up!</a>
+                    <a href="${getLinkWith(user, title, author, 'middle')}">Ehh</a>
+                    <a href="${getLinkWith(user, title, author, 'down')}">Not for me.</a>
+                `;
+
+                const box = document.querySelector('.toastbox');
+                box.textContent = 'Updated successfully! Copy and past these link/buttons.';
+                setTimeout(_ => {
+                    box.textContent = '';
+                }, 2200);
+            } else {
+                alert('Not all the values were filled out!');
             }
-            a {
-                display: block;
-                background: #aaa;
-                color: #fff;
-                font-family: sans-serif;
-                float: left;
-                margin: 6px;
-                padding: 4px 6px;
-                border-radius: 3px;
-                font-family: sans-serif;
-                text-decoration: none;
-            }
-            </style>
+        }
 
-            <a href="${getLinkWith(user, title, author, 'up')}">Thumbs up!</a>
-            <a href="${getLinkWith(user, title, author, 'middle')}">Ehh</a>
-            <a href="${getLinkWith(user, title, author, 'down')}">Not for me.</a>
-        `;
+        document.querySelector('.renderButton').addEventListener('click', update);
+    </script>
 
-        const box = document.querySelector('.toastbox');
-        box.textContent = 'Updated successfully! Copy and past these link/buttons.';
-        setTimeout(_ => {
-            box.textContent = '';
-        }, 2200);
-    } else {
-        alert('Not all the values were filled out!');
-    }
-}
+</body>
 
-document.querySelector('.renderButton').addEventListener('click', update);
-        </script>
-
-    </body>
 </html>
