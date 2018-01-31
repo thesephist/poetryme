@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>PoetryMe</title>
+    </head>
+
+    <body>
+
+        <div class="spinner">
+            We're sending your request...
+        </div>
+
+
+        <div class="message" style="display: none">
+            We got it! We'll tune our suggestions for the next time.
+        </div>
+
+        <div class="error" style="display: none">
+            Sorry, something went wrong! It's not your fault. If this keeps happening, please let us know at hi [at] poetryme.com
+        </div>
+
+        <div class="errorContent">
+        </div>
+
+        <script>
+            // Columns are:
+            // time (IFTTT takes care of this for us)
+            // title (poem title) + ' _by_ ' + author (one ifttt value)
+            // user
+
+            (function() {
+                const spinner = document.querySelector('.spinner');
+                const message = document.querySelector('.message');
+                const error = document.querySelector('.error');
+                const errC = document.querySelector('.errorContent');
+
+                const setv = (el, state) => {
+                    // set visibility
+                    if (state) {
+                        el.style.display = 'block';
+                    } else {
+                        el.style.display = 'none';
+                    }
+                }
+
+                function getQueryValues() {
+                    const queries = window.location.search.substr(1);
+                    const key_value = {};
+                    for (const pair of queries.split('&')) {
+                        const [k, v] = pair.split('=');
+                        key_value[k] = decodeURI(v);
+                    }
+
+                    return key_value;
+                }
+
+                const {title, author, user, response} = getQueryValues();
+
+                if (title && response && user) {
+                    fetch(`https://maker.ifttt.com/trigger/pm_feedback/with/key/bVFc_4CoaN3D_lYvI8-OPZ?value1=${title}_by_${author}&value2=${response}&value3=${user}`, {
+                        mode: 'no-cors',
+                    }).then(_ => {
+                        setv(spinner, 0);
+                        setv(message, 1);
+                    }).catch(e => {
+                        setv(spinner, 0);
+                        setv(error, 1);
+                        errC.textContent = 'Webhook request failed:' + e.toString();
+                    });
+                } else {
+                    setv(spinner, 0);
+                    setv(error, 1);
+                    errC.textContent = `Query parameters absent: ${title}, ${author}, ${response}, ${user}`;
+                }
+            })();
+        </script>
+
+    </body>
+
+</html>

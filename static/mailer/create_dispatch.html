@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PoetryMe Link Generator</title>
+    </head>
+    <body>
+
+        <div class="form">
+            <div class="item">
+                <label for="form__user">User name</label>
+                <input type="text" id="form__user" placeholder="Jane Doe" value="test">
+            </div>
+            <div class="item">
+                <label for="form__title">Poem Title</label>
+                <input type="text" id="form__title" placeholder="Red Wheelbarrow" value="test">
+            </div>
+            <div class="item">
+                <label for="form__author">Author</label>
+                <input type="text" id="form__author" placeholder="T. S. Eliot" value="test">
+            </div>
+
+            <button class="renderButton">Get links!</button>
+        </div>
+
+        Copy from right after here...
+        <div class="linkToCopy">
+        </div>
+        ... to right before here
+
+        <div class="toastbox">
+        </div>
+
+        <script>
+function getValueFor(slug) {
+    return document.querySelector(`#form__${slug}`).value;
+}
+
+function getLinkWith(user, title, author, response) {
+    return `https://poetryme.com/response?title=${title}&user=${user}&author=${author}&response=${response}`;
+}
+
+function update() {
+    const user = getValueFor('user');
+    const title = getValueFor('title');
+    const author = getValueFor('author');
+
+    if (user && title && author) {
+        // Update the buttons
+        document.querySelector('.linkToCopy').innerHTML = `
+            <style>
+            .linkToCopy {
+                overflow: hidden;
+                margin: 8px;
+            }
+            a {
+                display: block;
+                background: #aaa;
+                color: #fff;
+                font-family: sans-serif;
+                float: left;
+                margin: 6px;
+                padding: 4px 6px;
+                border-radius: 3px;
+                font-family: sans-serif;
+                text-decoration: none;
+            }
+            </style>
+
+            <a href="${getLinkWith(user, title, author, 'up')}">Thumbs up!</a>
+            <a href="${getLinkWith(user, title, author, 'middle')}">Ehh</a>
+            <a href="${getLinkWith(user, title, author, 'down')}">Not for me.</a>
+        `;
+
+        const box = document.querySelector('.toastbox');
+        box.textContent = 'Updated successfully! Copy and past these link/buttons.';
+        setTimeout(_ => {
+            box.textContent = '';
+        }, 2200);
+    } else {
+        alert('Not all the values were filled out!');
+    }
+}
+
+document.querySelector('.renderButton').addEventListener('click', update);
+        </script>
+
+    </body>
+</html>
