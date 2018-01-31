@@ -3,6 +3,21 @@
 
 <head>
     <title>PoetryMe Link Generator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 16px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .item,
+        .form {
+            margin-bottom: 14px;
+        }
+        .linkToCopy {
+            color: #aaa;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,8 +39,11 @@
         <button class="renderButton">Get links!</button>
     </div>
 
+    <hr/>
+
     Copy from right after here...
     <div class="linkToCopy">
+        [buttons will appear here]
     </div>
     ... to right before here
 
@@ -68,9 +86,9 @@
                     }
                     </style>
 
-                    <a href="${getLinkWith(user, title, author, 'up')}">Thumbs up!</a>
-                    <a href="${getLinkWith(user, title, author, 'middle')}">Ehh</a>
-                    <a href="${getLinkWith(user, title, author, 'down')}">Not for me.</a>
+                    <a title="Thumbs up!" href="${getLinkWith(user, title, author, 'up')}">👍</a>
+                    <a title="Hm... not sure." href="${getLinkWith(user, title, author, 'middle')}">💭</a>
+                    <a title="Not for me." href="${getLinkWith(user, title, author, 'down')}">👎/a>
                 `;
 
                 const box = document.querySelector('.toastbox');
