@@ -3,6 +3,28 @@
 
 <head>
     <title>PoetryMe Response</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+            background: #eee;
+            max-width: 600px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .spinner,
+        .message,
+        .error,
+        .errorContent {
+            margin-bottom: 14px;
+        }
+        .errorContent {
+            color: crimson;
+            font-family: monospace;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,7 +80,7 @@
             const { title, author, user, response } = getQueryValues();
 
             if (title && response && user) {
-                fetch(`https://maker.ifttt.com/trigger/pm_feedback/with/key/bVFc_4CoaN3D_lYvI8-OPZ?value1=${title}_by_${author}&value2=${response}&value3=${user}`, {
+                fetch(`https://maker.ifttt.com/trigger/pm_feedback/with/key/bVFc_4CoaN3D_lYvI8-OPZ?value1=${title} (by ${author})&value2=${response}&value3=${user}`, {
                     mode: 'no-cors',
                 }).then(_ => {
                     setv(spinner, 0);
